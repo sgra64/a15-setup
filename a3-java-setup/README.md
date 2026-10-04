@@ -56,17 +56,41 @@ for problems of *Java 25* with the [*lombok*](https://projectlombok.org/) librar
 It is *adviced* to use the stable *Java 25* for the course. The more adventurous can
 try the latest *Java*.
 
-Verify your *Java* installation and install, if needed:
 
-**`->` Mac:** - follow steps in article [*"Install Java on macOS"*](https://www.baeldung.com/java-macos-installation#using-homebrew-package-manager)
+&nbsp;
+---
+### Install *Java* or use a *Dev-Container*
+
+If you have no *Java* (25 LTS) installed, install or create a *Dev-Container*.
+
+Installation:
+
+**`->` Mac:** - follow steps in article
+    [*"Install Java on macOS"*](https://www.baeldung.com/java-macos-installation#using-homebrew-package-manager)
     using *brew* (mind to choose Java not older than *Java 25*, which is preferred).
 
 **`->` Windows:** - download
     [*x64 installer*](https://www.oracle.com/de/java/technologies/downloads/#jdk25-windows)
     and install *Java*.
 
-**`->` Linux:** - follow steps in article [*"ava auf Linux installieren"*](https://docs.fabricmc.net/de_de/players/installing-java/linux) depending on your *Linux* distribution.
+**`->` Linux:** - follow steps in article
+    [*"Java auf Linux installieren"*](https://docs.fabricmc.net/de_de/players/installing-java/linux)
+    depending on your *Linux* distribution.
 
+
+*Dev-Container*:
+
+[*VSCode Dev-Containers*](https://learn.microsoft.com/en-us/windows/dev-environment/docker/dev-containers)
+use *Docker Containers* with the *VSCode-IDE*.
+They are convenient to setup for different programming environments.
+
+A *Dev-Container* is created based on a configuration file `devcontainer.json` in a
+directory `.devcontainer` residing in a project directory, see:
+
+- [*dev-container-java*](../dev-container-java/.devcontainer) for a *Java Dev-Container*
+    with configuration file
+    [`.devcontainer/devcontainer.json`](../dev-container-java/.devcontainer/devcontainer.json)
+    (Java).
 
 
 &nbsp;
@@ -137,7 +161,7 @@ java HelloWorld             --> 'Hello, World!'
 In order to collect points, show a terminal on your laptop with commands:
 
 ```sh
-java --version          --> java 25.0.2 2026-01-20 LTS
+java --version          --> java 25.0.2 2026-01-20 LTS -- or similar
 
 javac --version         --> javac 25
 
@@ -163,4 +187,3 @@ jar 25.0.2
 
 Hello, World!
 ```
-

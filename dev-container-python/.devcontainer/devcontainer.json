@@ -1,0 +1,24 @@
+{
+  "name": "Python Light-Dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  // Verhindert, dass der Container nach dem Start sofort wieder stoppt
+  "overrideCommand": true,
+  
+  // VS Code Erweiterungen, die direkt im Container laufen sollen
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",        // Offizielle Python-Unterstützung
+        "ms-python.vscode-pylance" // Schnelles IntelliSense & Type-Checking
+      ],
+      "settings": {
+        "python.analysis.typeCheckingMode": "basic"
+      }
+    }
+  },
+
+  // Installiert Ihre Python-Pakete automatisch nach dem Erstellen des Containers
+  "postCreateCommand": "if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi"
+}

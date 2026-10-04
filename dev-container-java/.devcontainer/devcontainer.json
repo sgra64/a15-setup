@@ -1,0 +1,30 @@
+{
+  "name": "Java 25 (Lightweight)",
+  // Nutzt das offizielle Temurin-Image mit vorinstalliertem JDK 25
+  "image": "eclipse-temurin:25-jdk",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Optimiert Java-Performance im Container (deaktiviert ungenutzte Hintergrundprozesse)
+        "java.import.gradle.enabled": false,
+        "java.import.maven.enabled": true,
+        "java.autobuild.enabled": false
+      },
+      "extensions": [
+        // Die offiziellen und essenziellen Erweiterungen für Java-Entwicklung
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  },
+
+  // Falls du standardmäßig Build-Tools wie Maven oder Gradle benötigst,
+  // kannst du diese zeiteffizient über vordefinierte Features nachladen:
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+    // "ghcr.io/devcontainers/features/common-utils:2": {} // Optional für zsh, curl, etc.
+  },
+
+  // Startet den Container standardmäßig als unprivilegierten root-Nutzer (Alpine-Standard)
+  "remoteUser": "root"
+}

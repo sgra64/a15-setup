@@ -4,7 +4,26 @@
 
 &nbsp;
 
-### Setup *Python*
+### Install *Python* or use a *Dev-Container*
+
+If you have no *Python* (version 3) installed, install or create a *Dev-Container*.
+
+[*VSCode Dev-Containers*](https://learn.microsoft.com/en-us/windows/dev-environment/docker/dev-containers)
+use *Docker Containers* with the *VSCode-IDE*.
+They are convenient to setup for different programming environments.
+
+A *Dev-Container* is created based on a configuration file `devcontainer.json` in a
+directory `.devcontainer` residing in a project directory, see:
+
+- [*dev-container-python*](../dev-container-python/.devcontainer) for a *Python Dev-Container*
+    with configuration file
+    [`.devcontainer/devcontainer.json`](../dev-container-java/.devcontainer/devcontainer.json)
+    (Python).
+
+
+&nbsp;
+
+### Verify *Python*
 
 Check if you have *Python 3* installed. Name three differences between
 [Python 2 and 3](https://www.guru99.com/python-2-vs-python-3.html#7).
