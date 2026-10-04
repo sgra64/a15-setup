@@ -1,0 +1,23 @@
+ask google: https://www.google.com/search?q=what+is+the+command+to+create+html+documentation+for+a+python+file
+
+hello-world.py:
+---------------
+def hello_world():
+    # print string "Hello World!"
+    print("Hello World")
+
+# call function
+hello_world()
+
+
+Compile documentation using the 'pdoc' module (install, if not present):
+------------------------------------------------------------------------
+
+# install module 'pdoc' for generating documentation
+pip install pdoc
+
+# generate documentation for file hello-world.py, output to ./doc
+pdoc -o ./docs hello-world.py
+
+# show documentation
+chrome ./docs/index.html
