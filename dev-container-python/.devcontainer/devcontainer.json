@@ -3,22 +3,43 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  // Verhindert, dass der Container nach dem Start sofort wieder stoppt
+  // prevent the container to stop after start
   "overrideCommand": true,
-  
-  // VS Code Erweiterungen, die direkt im Container laufen sollen
+
+  // https://code.visualstudio.com/remote/advancedcontainers/change-default-source-mount
+  // https://dev.to/graezykev/dev-containers-part-2-image-features-workspace-environment-variables-375o
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
+
+  // reuse named container
+  "runArgs": [
+    "--name=dev-container-python312"
+  ],
+
+  // VSCode extensions and customizations
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-python.python",        // Offizielle Python-Unterstützung
-        "ms-python.vscode-pylance" // Schnelles IntelliSense & Type-Checking
+        "ms-python.python",         // official Python
+        "ms-python.vscode-pylance"  // faster IntelliSense & type-checking
       ],
       "settings": {
-        "python.analysis.typeCheckingMode": "basic"
+        "python.analysis.typeCheckingMode": "basic",
+
+        // define custom profile for the terminal launched from the container
+        "terminal.integrated.profiles.linux": {
+          "bash-with-init": {
+            "path": "/bin/bash",
+            // --init-file forces to load a custom script instead of .bashrc
+            "args": ["--init-file", "${containerWorkspaceFolder}/.devcontainer/.termrc"]
+          }
+        },
+        // use this profile when a new terminal opens in container
+        "terminal.integrated.defaultProfile.linux": "bash-with-init"
       }
     }
   },
 
-  // Installiert Ihre Python-Pakete automatisch nach dem Erstellen des Containers
+  // install Python packages after the container has been created
   "postCreateCommand": "if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi"
 }

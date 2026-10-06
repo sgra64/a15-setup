@@ -1,0 +1,16 @@
+#!/bin/bash
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# add key-bindings to detach/re-attach integrated terminal
+# ^K + ^S -- open keybindings and search for: "Terminal: Move"
+# add key-bindings:
+# - ^T + ^D - detach terminal
+# - ^T + ^A - re-attach terminal into panel
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+export CONTAINER_NAME="devcontainer-jdk25"
+export HOME="/workspace"
+
+[ -f $HOME/.devcontainer/.profile ] && source $HOME/.devcontainer/.profile
+[ -f $HOME/.devcontainer/.bashrc ] && source $HOME/.devcontainer/.bashrc
+
+#show system
+uname -a

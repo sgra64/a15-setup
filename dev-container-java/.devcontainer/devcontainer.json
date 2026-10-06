@@ -1,30 +1,50 @@
 {
-  "name": "Java 25 (Lightweight)",
-  // Nutzt das offizielle Temurin-Image mit vorinstalliertem JDK 25
+  // use official Temurin-image with pre-installed JDK 25
+  "name": "Java-25 (openjdk-25)",
   "image": "eclipse-temurin:25-jdk",
 
+  // https://code.visualstudio.com/remote/advancedcontainers/change-default-source-mount
+  // https://dev.to/graezykev/dev-containers-part-2-image-features-workspace-environment-variables-375o
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
+
+  // reuse named container
+  "runArgs": ["--name=dev-container-openjdk25"],
+
+  // VSCode extensions and customizations
   "customizations": {
     "vscode": {
       "settings": {
-        // Optimiert Java-Performance im Container (deaktiviert ungenutzte Hintergrundprozesse)
+        // (ex-)include build tools and (de-)activate automatic build process
         "java.import.gradle.enabled": false,
         "java.import.maven.enabled": true,
-        "java.autobuild.enabled": false
+        "java.autobuild.enabled": false,
+
+        // define custom profile for the terminal launched from the container
+        "terminal.integrated.profiles.linux": {
+            "bash": {
+            "path": "/bin/bash",
+            // --init-file forces to load a custom script instead of .bashrc
+            "args": ["--init-file", "${containerWorkspaceFolder}/.devcontainer/.termrc"]
+            }
+        },
+        // use this profile when a new terminal opens in container
+        "terminal.integrated.defaultProfile.linux": "bash"
       },
+
+      // extensions
       "extensions": [
-        // Die offiziellen und essenziellen Erweiterungen für Java-Entwicklung
         "vscjava.vscode-java-pack"
       ]
     }
   },
 
-  // Falls du standardmäßig Build-Tools wie Maven oder Gradle benötigst,
-  // kannst du diese zeiteffizient über vordefinierte Features nachladen:
+  // add features to container
   "features": {
     "ghcr.io/devcontainers/features/git:1": {}
-    // "ghcr.io/devcontainers/features/common-utils:2": {} // Optional für zsh, curl, etc.
+    // "ghcr.io/devcontainers/features/common-utils:2": {} // optional für zsh, curl, etc.
   },
 
-  // Startet den Container standardmäßig als unprivilegierten root-Nutzer (Alpine-Standard)
+  // start container as root-User (Alpine-standard)
   "remoteUser": "root"
 }

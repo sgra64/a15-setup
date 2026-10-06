@@ -141,6 +141,9 @@ Applies to all laptops: *Mac*, *Windows* and *Linux*.
 Open a new terminal, type and understand the following commands:
 
 ```sh
+# show the system running for this terminal
+uname -a
+
 # show my user-id
 whoami 
 
@@ -157,14 +160,14 @@ ls -l
 # show content of the 'HOME' directory ('-a' show all file/directories, also dotfiles)
 ls -la
 
-# show the real path to the current ('.') directory
+# show the actual path to the current ('.') directory resolving symbolic links
 realpath .
 
 # show content of the 'PATH' variable
 echo $PATH
 
 # pretty print 'PATH' using the character translation command 'tr'
-echo ${$PATH} | tr ':' '\n'
+echo ${PATH} | tr ':' '\n'
 
 # output text 'Hello World'
 echo "Hello World"
@@ -188,5 +191,6 @@ cat hello.txt | sed 's/./&\n/g' | wc
 ---
 ### Validation
 
-In order to collect points, show the terminal on your laptop with the commands above.
+In order to collect points, show the terminal on your laptop with
+the commands above.
 
