@@ -186,11 +186,83 @@ cat hello.txt | sed 's/./&\n/g' | wc
 
 ```
 
+Understand what happens when command: `cat hello.txt | sed 's/./&\n/g'`
+is executed in a terminal:
+
+```sh
+# split into lines for each character using the stream editor 'sed'
+cat hello.txt | sed 's/./&\n/g'
+```
+```
+H
+e
+l
+l
+o
+
+W
+o
+r
+l
+d
+```
+
+A *"terminal"* is a process executing software that presents a terminal window.
+A *terminal* is always associated with a *"shell"*, a process that receives a
+command-string, parses and executes it.
+
+In the particular case, the *shell* *"forks"* two (child-) processes executing
+programms `cat` (reads a file and outputs its content to *stdout*) and `sed`
+(stream-editor that performs substitutions to add a newline after each character
+such that the text prints vertically):
+
+New processes only be created by a parent process *"forking"* child-
+processes, which in-turn can fork more child-processes yielding a
+process hierarchy. *fork()* is the name of the operating system function
+that can be invoked by a process. It causes duplication of the invoking
+process returning the process-id (PID) (an *int* number  *&gt; 0*) of
+the child to the parent process. Value *0* is returned in the child process:
+
+```c
+/* Schematic code of a shell-process forking a child-process that */
+/* overlays its program with code from an executable file.        */
+main() {
+    int pid;
+    if((pid = fork()) != 0) {
+        /* branch continues executing the shell process as parent */
+        ...
+    } else {
+        /* pid==0: child process overlays its code obtained from  */
+        /* an executable program, e.g. 'cat' */
+        exec("cat");
+    }
+}
+```
+
+In the particular case, two child-processes are forked by the shell process that
+are connected by a `|` (*"pipe"*). A *pipe* is a data structure in the operating
+system kernel that receives and buffers *"standard output (stdout)"* from one
+process and feeds it out as *"standard input (stdin)"* for another process.
+
+<img src="../markup/img/unix-processes-connected-by-a-pipe.jpg" width="400"/>
+
 
 &nbsp;
 ---
 ### Validation
 
 In order to collect points, show the terminal on your laptop with
-the commands above.
+the commands above and answers to quesitons.
+
+
+Answer questions:
+
+1. What is the difference between a *"program"* and a *"process"*?
+
+1. How many processes are involved in command:
+    `cat hello.txt | sed 's/./&\n/g'`?
+
+1. Name these processes.
+
+1. What is a *"pipe"*?
 
