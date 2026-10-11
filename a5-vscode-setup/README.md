@@ -225,21 +225,6 @@ Example of settings for a *Java* project:
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.debug.settings.onBuildFailureProceed": true,
     "java.debug.settings.showHex": true,
-    // set 'java.home'
-    // "java.jdt.ls.java.home": "C:/Program Files/Java/jdk-21",
-    // "java.configuration.runtimes": [{
-    //     "name": "JavaSE-21",
-    //     // (mac) "path": "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home",
-    //     // (mac) "path": "/opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home",
-    //     // (Linux) "path": "/usr/lib/jvm/java-21-openjdk-amd64",
-    //     "path": "C:/Program Files/Java/jdk-21",
-    //     "javadoc": "https://docs.oracle.com/en/java/javase/21/docs/api",
-    //     "default": true
-    // }],
-    // "java.inlayHints.parameterNames.enabled": "none",
-    // "java.debug.settings.onBuildFailureProceed": true,
-    // // disable warnings for unused imports in Java in Visual Studio Code
-    // "java.compile.nullAnalysis.mode": "disabled",
 
     // Project Maven settings
     "maven.executable.path": "C:/opt/maven/bin",
@@ -247,7 +232,7 @@ Example of settings for a *Java* project:
 }
 ```
 
-See also [*dev-container-java/.vscode*](dev-container-java/.vscode) for the
+See also [*dev-container-java/.vscode*](../dev-container-java/.vscode) for the
 settings of the Java devcontainer project.
 
 
@@ -321,19 +306,133 @@ Verify settings in the system-wide `settings.json` file:
 ]
 ```
 
+Use key-bindings and detach the terminal. The terminal now exists in its
+own window. Re-attaching the terminal brings the terminal back into the
+IDE.
+
+<img src="../markup/img/vscode-2-devcontainer-helloworld-java-detached.png" width="800"/>
+
+
+&nbsp;
+---
+### VSCode Dev-Container
+
+Read article
+[*Devcontainers for VSCode: Setting Up Reproducible Development Environments*](https://www.mironsoft.de/en/blog/docker-setting-up-devcontainers-for-vs-code)
+and understand the purpose and value of *VSCode dev-containers*.
+
+The main advantage of *VSCode Dev-Container* is to **unify the development
+environment** used in software development team. All developers use exactly
+the same versions of operating systems, compilers and tools in their own
+containers.
+
+File [`.devcontainer/devcontainer.json`](../dev-container-java/.devcontainer/devcontainer.json)
+in the project directory
+(*Java* dev-container, see for [*Python*](../dev-container-python/.devcontainer/devcontainer.json))
+provides a *specification* that exactly defines the container.
+Based on that , *VSCode* creates the container with exactly the
+specified content.
+
+*VSCode* recognizes the presence of a `.devcontainer` directory in a project
+and file `devcontainer.json` with the specification within and creates and/or
+launches the container with exactly the specified content. The container may
+be local (on the laptop) or remote, e.g. in a *Cloud* data center.
+
+*VSCode* then connects the IDE to the container. Edits, compiles, debugs are
+performed in the container (not on the developer's laptop), but appear local.
+Terminal-shells execute in the container and hence show the container environment,
+not the local laptop environment.
+
+In order to use *VSCode Dev-Container*, you need on your laptop
+
+- *VSCode IDE* with the
+
+- [*Dev Containers plugin*](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+    and
+
+- *Docker-for-Desktop* for local container execution installed.
+
+
+&nbsp;
+---
+### Build and Run a Dev-Container
+
+<!-- 
+CONTAINER_NAME="dev-container-openjdk25"
+TARGET_PATH="/workspace"
+HEX_NAME=$(echo -n "$CONTAINER_NAME" | xxd -p | tr -d '\n')
+code --folder-uri "vscode-remote://attached-container+${HEX_NAME}${TARGET_PATH}"
+code --folder-uri vscode-remote://attached-container+6465762d636f6e7461696e65722d6f70656e6a646b3235
+ -->
+
+Inspect
+[`.devcontainer`](../dev-container-java/.devcontainer) for *Java* (use
+[`.devcontainer`](../dev-container-python/.devcontainer) for *Python*)
+and include content into the `hello-world` project.
+
+(Re-)start *VSCode* in the project. *VSCode* recognizes the presence of
+the `.devcontainer` directory and creates and launches the container
+with the specified content.
+
+In the case of *Java*, image
+[`eclipse-temurin:25-jdk`](https://hub.docker.com/hardened-images/catalog/dhi/eclipse-temurin/images?orderBy=last-pushed&order=desc&pageSize=100)
+is pulled from the global *hub.docker* registry. In the case of *Python*, image
+[`python:3.12-slim`](https://hub.docker.com/_/python)
+is referred to in the *Dockerfile* for building the image that is used by
+the container. Based on the image, a container is created with name:
+
+- `dev-container-openjdk25` for *Java* and
+
+- `dev-container-python312` for *Python*.
+
+When *VSCode* is ready with the dev-container, open a terminal and compile and
+run the code. Make sure you see `Linux ...` running in the terminal that is
+connected to the container.
+The conntection status to the dev-container is shown in the lower left corner.
+
+<img src="../markup/img/vscode-3-devcontainer-helloworld-java.png" width="800"/>
+
+(see [*vscode-python*](../markup/img/vscode-3-devcontainer-helloworld-python.png)).
+
 
 &nbsp;
 ---
 ### Validation
 
-In order to collect points, show *VSCode* working on your laptop with
-the settings turned-on in the figure:
+In order to collect points, show *VSCode* on your laptop with the settings
+turned-on (see the figure at the beginning of this page):
 
-- `UTF-8`.
+1. Show that `UTF-8` is turned on.
 
-- LF (not `CR/LF`).
+1. Show that `LF`, not `CR/LF` is turned on.
 
-- *"Hello, World!"* printout after running the program with *Code Runner*.
+1. Start the `dev-container-openjdk25` container (or the *Python* container for
+    *Python*) and connect the *VSCode* IDE to this container.
 
-- open detached terminal with key-bindings and run *"Hello, World!"* there.
+<!-- 
+1. Set a break-point at the line with `System.out.println()` as shown in the
+    first figure of this page and launch the *"Hello, World!"* program in debug
+    mode. Program execution stops at this line.
+
+    <img src="../markup/img/vscode-4-devcontainer-debug-stop.png" width="400"/>
+
+&nbsp;
+ -->
+
+1. Detached the terminal with: `^T + ^D` and compile and run *"Hello, World!"* in the
+    detached terminal.
+
+    <img src="../markup/img/vscode-2-devcontainer-helloworld-java-detached.png" width="400"/>
+
+&nbsp;
+
+1. Open your system-wide *VSCode* `settings.json` file and show you have turned *autosave* on:
+
+    ```json
+    {
+        "files.autoSave": "afterDelay",         // 'afterDelay' (1sec), 'onFocusChange', 'onWindowChange'
+        "files.autoSaveDelay": 800,
+        // ...
+    }
+    ```
 
