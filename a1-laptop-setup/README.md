@@ -216,12 +216,12 @@ programms `cat` (reads a file and outputs its content to *stdout*) and `sed`
 (stream-editor that performs substitutions to add a newline after each character
 such that the text prints vertically):
 
-New processes only be created by a parent process *"forking"* child-
-processes, which in-turn can fork more child-processes yielding a
-process hierarchy. *fork()* is the name of the operating system function
-that can be invoked by a process. It causes duplication of the invoking
-process returning the process-id (PID) (an *int* number  *&gt; 0*) of
-the child to the parent process. Value *0* is returned in the child process:
+New processes are created by a parent process *"forking"* a child-process,
+which in-turn can fork more child-processes yielding a process hierarchy.
+*fork()* is an operating system function that can be invoked by any process.
+It causes the duplication of the invoking process returning the process-id (PID)
+(an *int* number  *&gt; 0*) of the new child-process to the parent process.
+Value *0* is returned in the child process:
 
 ```c
 /* Schematic code of a shell-process forking a child-process that */
