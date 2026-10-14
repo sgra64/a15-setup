@@ -326,7 +326,7 @@ environment** used in software development team. All developers use exactly
 the same versions of operating systems, compilers and tools in their own
 containers.
 
-File [`.devcontainer/devcontainer.json`](../dev-container-java/.devcontainer/devcontainer.json)
+File [*.devcontainer/devcontainer.json*](../dev-container-java/.devcontainer/devcontainer.json)
 in the project directory
 (*Java* dev-container, see for [*Python*](../dev-container-python/.devcontainer/devcontainer.json))
 provides a *specification* that exactly defines the container.
@@ -366,8 +366,8 @@ code --folder-uri vscode-remote://attached-container+6465762d636f6e7461696e65722
  -->
 
 Inspect
-[`.devcontainer`](../dev-container-java/.devcontainer) for *Java* (use
-[`.devcontainer`](../dev-container-python/.devcontainer) for *Python*)
+[*.devcontainer*](../dev-container-java/.devcontainer) for *Java* (use
+[*.devcontainer*](../dev-container-python/.devcontainer) for *Python*)
 and include content into the `hello-world` project.
 
 (Re-)start *VSCode* in the project. *VSCode* recognizes the presence of
@@ -375,15 +375,15 @@ the `.devcontainer` directory and creates and launches the container
 with the specified content.
 
 In the case of *Java*, image
-[`eclipse-temurin:25-jdk`](https://hub.docker.com/hardened-images/catalog/dhi/eclipse-temurin/images?orderBy=last-pushed&order=desc&pageSize=100)
+[*eclipse-temurin:25-jdk*](https://hub.docker.com/hardened-images/catalog/dhi/eclipse-temurin/images?orderBy=last-pushed&order=desc&pageSize=100)
 is pulled from the global *hub.docker* registry. In the case of *Python*, image
-[`python:3.12-slim`](https://hub.docker.com/_/python)
+[*python:3.12-slim*](https://hub.docker.com/_/python)
 is referred to in the *Dockerfile* for building the image that is used by
 the container. Based on the image, a container is created with name:
 
-- `dev-container-openjdk25` for *Java* and
+- *dev-container-openjdk25* for *Java* and
 
-- `dev-container-python312` for *Python*.
+- *dev-container-python312* for *Python*.
 
 When *VSCode* is ready with the dev-container, open a terminal and compile and
 run the code. Make sure you see `Linux ...` running in the terminal that is
@@ -394,6 +394,8 @@ The conntection status to the dev-container is shown in the lower left corner.
 
 (see [*vscode-python*](../markup/img/vscode-3-devcontainer-helloworld-python.png)).
 
+The indicator in the lower-left corner shows that *VSCode* is connected to the
+Dev-container.
 
 &nbsp;
 ---
@@ -409,30 +411,31 @@ turned-on (see the figure at the beginning of this page):
 1. Start the `dev-container-openjdk25` container (or the *Python* container for
     *Python*) and connect the *VSCode* IDE to this container.
 
-<!-- 
-1. Set a break-point at the line with `System.out.println()` as shown in the
-    first figure of this page and launch the *"Hello, World!"* program in debug
-    mode. Program execution stops at this line.
+    <!-- 
+    1. Set a break-point at the line with `System.out.println()` as shown in the
+        first figure of this page and launch the *"Hello, World!"* program in debug
+        mode. Program execution stops at this line.
 
-    <img src="../markup/img/vscode-4-devcontainer-debug-stop.png" width="400"/>
+        <img src="../markup/img/vscode-4-devcontainer-debug-stop.png" width="400"/>
 
-&nbsp;
- -->
+    &nbsp;
+    -->
 
-1. Detached the terminal with: `^T + ^D` and compile and run *"Hello, World!"* in the
+1. Detach the terminal with: `^T + ^D` and compile and run *"Hello, World!"* in the
     detached terminal.
 
     <img src="../markup/img/vscode-2-devcontainer-helloworld-java-detached.png" width="400"/>
 
-&nbsp;
+    &nbsp;
 
-1. Open your system-wide *VSCode* `settings.json` file and show you have turned *autosave* on:
+1. Open your system-wide *VSCode* `settings.json` file and show you have turned *autosave* on
+    and use `LF` (Unix) as line ending:
 
     ```json
     {
         "files.autoSave": "afterDelay",         // 'afterDelay' (1sec), 'onFocusChange', 'onWindowChange'
-        "files.autoSaveDelay": 800,
+        "files.autoSaveDelay": 800,             // auto-save file after short delay (800ms)
+        "files.eol": "\n",                      // use '\n' as default line ending (not: CR/LF)
         // ...
     }
     ```
-

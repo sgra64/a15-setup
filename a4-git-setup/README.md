@@ -683,6 +683,31 @@ git status
 git log --one-line
 ```
 
+File `~/.gitconfig` should contain:
+
+```
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Global git settings in $HOME/.gitconfig that apply to all user's git projects.
+# Settings for a specifc git project are in file <proj-dir>/.git/config.
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Enter your name and email in the [user] section below by editing or by
+# global git config commands:
+# - git config --global user.name "your name"
+# - git config --global user.email "your@email.com"
+#
+[user]
+    name = <your-name>
+    email = <your-email>
+
+[core]
+    ignorecase = true       # ignore upper/lower case in file names
+    autocrlf = false        # disable crlf conversion on checkout
+    filemode = false        # ignore filemode (rwx) changes
+    eol = lf                # always use newline '\n' as end-of-line
+```
+
+
+&nbsp;
 
 Answer question:
 

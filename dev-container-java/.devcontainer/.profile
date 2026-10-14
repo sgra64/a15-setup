@@ -197,6 +197,7 @@ if [ "${PX[declared]}" ]; then
 
         # "ex" used to be 'red'
         PX[ls-colors]=$(colorize_ls_colors \
+            "no"    low-white \
             "di"    bright-white \
             "ow"    white \
             "fi"    low-white \
@@ -287,7 +288,7 @@ if [ "${PX[declared]}" ]; then
 
         ["low-grey"]="0;30"     ["low-red"]="0;31"      ["low-green"]="0;32"
         ["low-yellow"]="0;33"   ["low-blue"]="0;34"     ["low-purple"]="0;35"
-        ["low-cyan"]="0;36"     ["low-white"]="0;37"    # ["low-white"]="0;37;1"
+        ["low-cyan"]="0;36"     ["low-white"]="0;30"    # ["low-white"]="0;37" ["low-white"]="0;37;1"
 
         ["bright-grey"]="1;90"  ["bright-red"]="1;91"   ["bright-green"]="1;92"
         ["bright-yellow"]="1;93" ["bright-blue"]="1;94" ["bright-purple"]="1;95"
