@@ -24,6 +24,9 @@ modern software development.
   - a [*VSCode Dev-Container*](https://learn.microsoft.com/en-us/windows/dev-environment/docker/dev-containers)
     -- that opens a *Linux*-Terminal in *VSCode* and is also running on *WSL*.
 
+    - Course *"Software Engineering-2"*: finish and validate part
+    [*Project Setup in *dev-container*](../dev-container-java/README.md)
+
 Depending on your system, verify you have the software installed described in the
 following section, install if necessary.
 
