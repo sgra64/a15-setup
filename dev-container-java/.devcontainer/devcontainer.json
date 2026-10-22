@@ -43,7 +43,8 @@
         "code-runner.saveAllFilesBeforeRun": true,
         "code-runner.runInTerminal": true,  // avoid UTF-8 problem in OUTPUT console on Windows
         "code-runner.executorMap": {
-            "java": "javac -d target/classes HelloWorld.java && java -cp target/classes HelloWorld",
+            // "java": "javac HelloWorld.java && java HelloWorld",
+            "java": "javac -d target/classes $(find . -name '*.java') && java -cp target/classes de.bht_berlin.application.HelloWorld",
             // "java": "javac -d target/classes src/**/*.java && java HelloWorld",
             // "java": "java -cp @.vscode/.classpath application.Application",
             "vmArgs": "-Dfile.encoding=UTF-8"

@@ -1,35 +1,38 @@
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 ## A5: *VSCode* - Setup
 
-[*Visual Studio Code (VSCode)*](https://code.visualstudio.com) by *Microsoft*
-is a modern, popular *IDE* (Integrated Development Environment) with:
+[*Visual Studio Code (VSCode)*](https://code.visualstudio.com) is a modern,
+popular *IDE* (Integrated Development Environment) by *Microsoft* with:
 
 - support for multiple programming languages (*"polyglot"*).
 
-- a large ecosystem of extensions (e.g. *"Java extension pack"*, *"Code Runner"*,
-    *Docker*, various AI extensions, etc.).
+- a large ecosystem of extensions (*plugins*, e.g. *"Java extension pack"*,
+    *"Code Runner"*, *Dev Container*, various *AI* extensions, etc.).
 
-- ability to develop in remote environments (cloud, containers) over the network.
+- ability to develop in remote environments (cloud containers) over the network.
 
-- built-in *AI integration* (Microsoft's *Co-Pilot*) or through extensions,
-    e.g. *Claude* and others.
+- built-in *AI integration* (Microsoft's *Co-Pilot*, *Claude*, etc.).
 
 
 For this course, the following *VSCode* extensions are recommended:
 
 - [*Extension Pack for Java*](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
-    -- required for *Java* courses.
+    -- required for *Java* courses
+    ([*Pyhon Extension*](https://code.visualstudio.com/docs/languages/python)
+     for *Python* courses).
 
 - [*Code Runner*](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
     -- recommended.
+
+- [*Dev Container*](https://code.visualstudio.com/docs/devcontainers/containers).
 
 
 &nbsp;
 ---
 ### Setup
 
-*VSCode* opens each project separately (not multiple projects or entire
-workspaces at once, which is in contrast to older *IDE* such as *eclipse*).
+*VSCode* opens each project separately (not multiple projects at once,
+which is in contrast to older *IDE* such as *eclipse*).
 
 It is thus recommended to start *VSCode* from within the project directory
 in a terminal. Verify that you can start *VSCode* from the terminal, e.g.
@@ -40,10 +43,10 @@ Navigate to the project directory and start *VSCode*:
 ```sh
 cd ~/workspaces/hello-world     # cd to into the project directory
 
-code .                          # start VSCode in this '.' (dot) current directory
+code .                          # start VSCode in the '.' (dot) current directory
 ```
 
-*VSCode* will open the project and show the project files.
+*VSCode* will open the project and show project files.
 
 Run the *HelloWorld* Program with:
 
@@ -52,8 +55,7 @@ Run the *HelloWorld* Program with:
 - [*Code Runner*](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
     that runs code faster by the key command: `<Ctrl> + <Alt> + N`.
 
-Output of the program should appear in the integrated Terminal panel (launcher) or
-in the Output panel (Code Runner).
+Output appears in the integrated Terminal panel.
 
 &nbsp;
 
@@ -64,70 +66,76 @@ in the Output panel (Code Runner).
 ---
 ### VSCode Paths
 
-*VSCode* installs (by default) under the folloing paths:
+*VSCode* (by default) installs under the folloing paths:
 
-```
+```sh
 Windows:    %APPDATA%/Local/Programs/Microsoft\ VS\ Code/bin
+            APPDATA: C:/Users/<user>/AppData/Roaming
+- example:  C:/Users/<user>/AppData/Roaming/Local/Programs/Microsoft\ VS\ Code/bin
+
 MacOS:      /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+Linux:      often under: /usr/share/code or: /opt/code
 ```
 
 *VSCode* internally chaches (makes copies of) projects where it compiles
-code and writes logs. These *"project caches"* keep all state of a *VSCode*
-project and are supposed to be hidden and separate from the actual project.
-This allows to keep project spaces clean and not cluttered with interim files.
+code and writes logs. These *"project caches"* keep state of a *VSCode*
+project and are supposed to be hidden and separate from the actual project
+you see in the *VSCode* IDE.
+This allows to keep project spaces clean and not cluttered with interim
+or temporary files.
 
 While this is good, sometimes it happens that strange effects happen in
 a *VSCode* project. Then, the project cache should be cleaned and reset.
 
-Project cache reset occurs in two steps:
+Project cache reset can occur in two steps:
 
-1. *regular reset* -- by `<Ctrl> + <Shift> + P` and (for Java) searching
-    for *"Java: Clean Java Language Server Workspace"* and performing
-    this action. *VSCode* will rebuild the project cache.
+1. *regular reset* -- by invoking `<Ctrl> + <Shift> + P` and (for Java)
+    searching for *"Java: Clean Java Language Server Workspace"* and
+    performing this action. This will rebuild the project cache and the
+    project may work afterwards.
 
-2. *hard reset* -- if this does not help, the project cache can be removed
-    in the file system.
+2. *hard reset* -- if a *regular reset* does not help, the project cache
+    can be removed in the file system.
 
     Paths of project caches are:
 
-    ```
+    ```sh
     Windows:    %APPDATA%/Code/User/workspaceStorage
     - example:  C:/Users/<user>/AppData/Roaming/Code/User/workspaceStorage
 
     Mac:        $HOME/Library/Application\ Support/Code/User/workspaceStorage
+    Linux:      $HOME/.config/Code/User/workspaceStorage
     ```
 
-    Remove the (or all) directories with project caches and restart *VSCode*.
-    *VSCode* will rebuild a new project cache.
+    Remove the (or all) project cache directory(ies) and restart *VSCode*.
+    *VSCode* will rebuild the new project cache.
 
 
 &nbsp;
 ---
 ### VSCode Settings
 
-*VSCode* maintains its settings in `settings.json` files. One (system-wide)
-settings file has settings valid for all projects on the system.
-A project can also hold specific project settings in the project directory
-under `.vscode/settings.json`.
+*VSCode* maintains configuration settings in `settings.json` files.
+One (system-wide) settings file holds settings that apply to all projects
+on the system. Projects can also hold specific project settings in
+the project directory under `.vscode/settings.json`.
 
 Locate the system-wide *VSCode* settings file on your system:
 
 ```sh
 # VSCode global settings file and project caches:
-- Windows:  %APPDATA%/Code/User
-            e.g.: C:/Users/<user>/AppData/Roaming/Code/User
+Windows:    %APPDATA%/Code/User
+- example:  C:/Users/<user>/AppData/Roaming/Code/User
 
-- MacOS:   ~/Library/Application\ Support/Code/User
+MacOS:      $HOME/Library/Application\ Support/Code/User
 
-- Linux:   $HOME/.config/Code/User/settings.json
-       +
-       +-- settings.json         ; VSCode global settings file
-       +-- workspaceStorage      ; VSCode project caches
+Linux:      $HOME/.config/Code/User/settings.json
 ```
 
-Locate your system-wide *VSCode* settings file and add usefull settings,
-particularly for turning-on *auto-save* and using *UTF-8*. Review also
-other settings and choose those that are suitable for you.
+Locate your system-wide *VSCode* settings file and understand settings.
+Add usefull settings, particularly for turning-on *auto-save* and using
+*UTF-8* and *"\n"* *(NL)* as default new line character. Review other
+settings and choose those that are suitable for you.
 
 ```json
 {
@@ -141,27 +149,12 @@ other settings and choose those that are suitable for you.
         "*.path": "shellscript",
         "**/.termrc": "shellscript"
     },
-    "terminal.integrated.hideOnStartup": "always",  // prevent terminal showing-up on startup
-    "explorer.confirmDelete": false,        // ask to comfirm file delete
-    "files.autoSave": "afterDelay",         // 'afterDelay' (1sec), 'onFocusChange', 'onWindowChange'
-    "files.autoSaveDelay": 800,
-    "files.eol": "\n",                      // use '\n' as default line ending (not: CR/LF)
-    "redhat.telemetry.enabled": false,
-    "testing.resultsView.layout": "treeLeft",
-    // "security.workspace.trust.untrustedFiles": "open",
+    "terminal.integrated.hideOnStartup": "always",  // prevent terminal showing-up at startup
+    "redhat.telemetry.enabled": false,          // don't collect telemetry data
+    "testing.resultsView.layout": "treeLeft",   // appearance of test results
 
     // Appearance and assistance settings
     "workbench.colorTheme": "Dark Modern",
-    "chat.viewSessions.orientation": "stacked",
-    "github.copilot.nextEditSuggestions.enabled": false,
-    "github.copilot.enable": {
-        "*": false,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false,
-        "java": false
-    },
-    "geminicodeassist.inlineSuggestions.enableAuto": true,
     // "window.zoomLevel": 1,
 
     // Editor settings
@@ -183,57 +176,37 @@ other settings and choose those that are suitable for you.
           "args": ["--init-file", "~/.profile"],
           "icon": "terminal-bash",
         },
-        "cmd.exe": {
-           "path": ["cmd.exe"],             // add 'cmd.exe' terminal
-        },
-        "PowerShell": null,                 // remove other terminals from menu unless
-        "Git Bash": null,                   // you want them
+        "PowerShell": null,                 // remove other terminals from the menu
+        "cmd.exe": null,                    // unless you want them
+        "Git Bash": null,
         "Command Prompt": null,
-        "JavaScript Debug Terminal": null,
         "Ubuntu (WSL)": null,
     },
-
-    // Docker settings (extension)
-    "docker.commands.attach": "${containerCommand} exec -it ${containerId} ${shellCommand}",
-    "containers.commands.attach": "${containerCommand} exec -it ${containerId} ${shellCommand}",
-
-    // Git settings
-    "git.confirmSync": false,
-    "git.openRepositoryInParentFolders": "never"
 }
 ```
 
-Project-specific settings overrule system-wide settings and are included in
-the project directory under: `.vscode/settings.json`.
-Example of settings for a *Java* project:
+Project-specific settings overrule system-wide settings in a project. They
+are stored in the project directory under: `.vscode/settings.json`.
+Review settings for a *Java* project as an example:
 
 ```json
 {
-    // Project Code Runner (extension) settings
+    // Code Runner settings
     "code-runner.defaultLanguage": "java",
-    "code-runner.showExecutionMessage": false,
     "code-runner.clearPreviousOutput": true,
+    "code-runner.saveAllFilesBeforeRun": true,
+    "code-runner.runInTerminal": true,  // avoid UTF-8 problem in OUTPUT console on Windows
     "code-runner.executorMap": {
-        "python": "c:/Users/svgr2/AppData/Local/Programs/Python/Python312/python.exe",
-        "java": "java $fileNameWithoutExt",
-        // "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        // "cpp": "cd $dir && g++ -std=c++14 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        // "html": "\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\""
+        "java": "javac HelloWorld.java && java HelloWorld",
+        "vmArgs": "-Dfile.encoding=UTF-8"
     },
 
     // Project Java settings
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.debug.settings.onBuildFailureProceed": true,
-    "java.debug.settings.showHex": true,
-
-    // Project Maven settings
-    "maven.executable.path": "C:/opt/maven/bin",
-    "maven.settingsFile": "",
+    "java.debug.settings.showHex": true
 }
 ```
-
-See also [*dev-container-java/.vscode*](../dev-container-java/.vscode) for the
-settings of the Java devcontainer project.
 
 
 &nbsp;
@@ -255,7 +228,7 @@ Set multiple cursors by:
 Block-comment multiple lines by:
 
 ```
-mark text and Ctrl-'#'
+mark text and <Click> + '#'
 ```
 
 
@@ -264,13 +237,13 @@ mark text and Ctrl-'#'
 ### Detach the integrated terminal using Key-bindings
 
 *Detaching a terminal* disconnects the terminal from the main *VSCode* panel
-into a separat window.
+and launches a separat window.
 
 *Key-bindings* are sequences of key strokes that can be defined to quickly
 perform actions. Custom key-bindings are stored in a file: `keybindings.json`
-that is stored with the system-wide or project `settings.json` file.
+that is stored with the system-wide or project `settings.json` files.
 
-The following `keybindings.json` file holds the bindings for actions:
+The following `keybindings.json` file holds bindings for actions:
 
 - *detach terminal* (`workbench.action.terminal.moveIntoNewWindow`)
     by: `<Ctrl> + <t> + <Ctrl> + <d>`,
@@ -278,18 +251,18 @@ The following `keybindings.json` file holds the bindings for actions:
 - *attach terminal* (`workbench.action.terminal.moveToTerminalPanel`)
     by: `<Ctrl> + <t> + <Ctrl> + <a>`.
 
-Set these key-bindings in *VSCode*:
+Add these key-bindings to *VSCode*:
 
 ```
-^K + ^S -- open keybindings and search for: "Terminal: Move"
+^K + ^S -- opens keybindings, search for: "Terminal: Move"
 
 add key-bindings:
 - ^T + ^D - detach terminal
-- ^T + ^E - re-attach terminal to editor area
-- ^T + ^P - re-attach terminal into panel
+- ^T + ^A - re-attach terminal back into the VSCode IDE
 ```
 
-Verify settings in the system-wide `settings.json` file:
+Verify settings in the system-wide `settings.json` file. The file should
+contain the key-bindings:
 
 ```json
 // Place your key bindings in this file to override the defaults
@@ -306,11 +279,12 @@ Verify settings in the system-wide `settings.json` file:
 ]
 ```
 
-Use key-bindings and detach the terminal. The terminal now exists in its
-own window. Re-attaching the terminal brings the terminal back into the
-IDE.
+Use key-bindings and detach the terminal. The terminal now shows with its
+own window.
 
 <img src="../markup/img/vscode-2-devcontainer-helloworld-java-detached.png" width="800"/>
+
+Re-attaching brings the terminal back into the IDE.
 
 
 &nbsp;
@@ -319,97 +293,122 @@ IDE.
 
 Read article
 [*Devcontainers for VSCode: Setting Up Reproducible Development Environments*](https://www.mironsoft.de/en/blog/docker-setting-up-devcontainers-for-vs-code)
-and understand the purpose and value of *VSCode dev-containers*.
+and understand the purpose and value of *VSCode Development (Dev-)Containers*.
 
-The main advantage of *VSCode Dev-Container* is to **unify the development
-environment** used in software development team. All developers use exactly
-the same versions of operating systems, compilers and tools in their own
-containers.
+The main advantage of *VSCode Dev-Container* is to
+*unify the development environment* in a software development team. All
+developers use exactly the same tools, same versions and same operating
+system in own container instances.
 
-File [*.devcontainer/devcontainer.json*](../dev-container-java/.devcontainer/devcontainer.json)
-in the project directory
-(*Java* dev-container, see for [*Python*](../dev-container-python/.devcontainer/devcontainer.json))
-provides a *specification* that exactly defines the container.
-Based on that , *VSCode* creates the container with exactly the
-specified content.
+File [*.devcontainer/devcontainer.json*](https://github.com/sgra64/dev-container-java/blob/main/devcontainer.json)
+(*Java*) in the project directory provides a *specification* that exactly
+defines the container used for development. Based on it, *VSCode* creates
+the container with exactly the specified content for every software developer
+using the *dev-container* (see
+[*devcontainer.json*](https://github.com/sgra64/dev-container-python/blob/main/devcontainer.json)
+for *Python*).
 
 *VSCode* recognizes the presence of a `.devcontainer` directory in a project
-and file `devcontainer.json` with the specification within and creates and/or
-launches the container with exactly the specified content. The container may
-be local (on the laptop) or remote, e.g. in a *Cloud* data center.
+when it starts and creates the specified *dev-container* or connects to an
+existing one using file `devcontainer.json`. The container may be local
+(on the laptop) or may be remote, e.g. run in a *Cloud* data center.
 
 *VSCode* then connects the IDE to the container. Edits, compiles, debugs are
-performed in the container (not on the developer's laptop), but appear local.
-Terminal-shells execute in the container and hence show the container environment,
-not the local laptop environment.
+performed in the container appearing as they were local. Terminal-shells
+execute in the container and hence show the container environment (not the
+local laptop environment).
 
-In order to use *VSCode Dev-Container*, you need on your laptop
+*VSCode Dev-Containers* require
 
-- *VSCode IDE* with the
+1. the *VSCode IDE* with the
 
-- [*Dev Containers plugin*](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+1. [*Dev Containers plugin*](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
     and
 
-- *Docker-for-Desktop* for local container execution installed.
+1. *Docker* or *Docker-for-Desktop* installed on your laptop.
 
 
 &nbsp;
 ---
-### Build and Run a Dev-Container
+### Prepare the Project for *Dev-Containers*
 
-<!-- 
-CONTAINER_NAME="dev-container-openjdk25"
-TARGET_PATH="/workspace"
-HEX_NAME=$(echo -n "$CONTAINER_NAME" | xxd -p | tr -d '\n')
-code --folder-uri "vscode-remote://attached-container+${HEX_NAME}${TARGET_PATH}"
-code --folder-uri vscode-remote://attached-container+6465762d636f6e7461696e65722d6f70656e6a646b3235
- -->
+Inspect repositories
+[*dev-container-java*](https://github.com/sgra64/dev-container-java) for *Java* (use
+[*dev-container-python*](https://github.com/sgra64/dev-container-python) for *Python*).
 
-Inspect
-[*.devcontainer*](../dev-container-java/.devcontainer) for *Java* (use
-[*.devcontainer*](../dev-container-python/.devcontainer) for *Python*)
-and include content into the `hello-world` project.
+In order to use dev-containers, a directory `.devcontainer` must exist in
+the project directory.
 
-(Re-)start *VSCode* in the project. *VSCode* recognizes the presence of
-the `.devcontainer` directory and creates and launches the container
-with the specified content.
+- Course *"Software Engineering 1"*: create the `.devcontainer` directory
+    in the project directory and copy files from
+    [*dev-container-java*](https://github.com/sgra64/dev-container-java).
 
-In the case of *Java*, image
+- Course *"Software Engineering 2"*: import the
+    [*dev-container-java*](https://github.com/sgra64/dev-container-java)
+    repository as a *git-module* into the project. Remember steps:
+    [*"4. Import git-Submodules"*](https://github.com/sgra64/se1-play#4-import-git-submodules-env-vscode-libs)
+    from *"Software Engineering 1"*. Import the git-module on a separate
+    branch `git-modules`.
+
+- Courses using *Python*: review the steps in
+    [*"4. Import git-Submodules"*](https://github.com/sgra64/se1-play#4-import-git-submodules-env-vscode-libs)
+    and import the repository
+    [*dev-container-python*](https://github.com/sgra64/dev-container-python)
+    as a git-module on a separate branch `git-modules`.
+
+
+&nbsp;
+---
+### Build and Run the *Dev-Container*
+
+If you got directory *.devcontainer* properly set up in the project
+directory, (re-)start *VSCode* in the project. *VSCode* recognizes
+the presence of the *.devcontainer* directory and creates and launches
+the container with the specified content.
+
+In case of *Java*, image
 [*eclipse-temurin:25-jdk*](https://hub.docker.com/hardened-images/catalog/dhi/eclipse-temurin/images?orderBy=last-pushed&order=desc&pageSize=100)
-is pulled from the global *hub.docker* registry. In the case of *Python*, image
-[*python:3.12-slim*](https://hub.docker.com/_/python)
-is referred to in the *Dockerfile* for building the image that is used by
-the container. Based on the image, a container is created with name:
+is pulled from the global [*hub.docker.com*](https://hub.docker.com) registry.
+In case of *Python*, image [*python:3.12-slim*](https://hub.docker.com/_/python)
+is used as *base image* in the [*Dockerfile*](https://github.com/sgra64/dev-container-python)
+that is used for building the image used by the container.
 
-- *dev-container-openjdk25* for *Java* and
+*Docker-for-Desktop* shows running containers that have been created
+based on these images:
 
-- *dev-container-python312* for *Python*.
+- *"dev-container-openjdk25"* for the *Java* dev-container and
 
-When *VSCode* is ready with the dev-container, open a terminal and compile and
-run the code. Make sure you see `Linux ...` running in the terminal that is
-connected to the container.
-The conntection status to the dev-container is shown in the lower left corner.
+- *"dev-container-python312"* for the *Python* dev-container.
+
+<img src="../markup/img/docker-dev-container-running.png" width="800"/>
+
+&nbsp;
+
+When *VSCode* is ready, open a terminal and compile and run the code. Make
+sure you see `Linux ...` running in the terminal connected to the container.
+The status of the conntection to the dev-container is shown in the lower
+left corner.
 
 <img src="../markup/img/vscode-3-devcontainer-helloworld-java.png" width="800"/>
 
-(see [*vscode-python*](../markup/img/vscode-3-devcontainer-helloworld-python.png)).
+(see for the [*Python dev-container*](../markup/img/vscode-3-devcontainer-helloworld-python.png)).
 
 The indicator in the lower-left corner shows that *VSCode* is connected to the
 Dev-container.
+
 
 &nbsp;
 ---
 ### Validation
 
-In order to collect points, show *VSCode* on your laptop with the settings
-turned-on (see the figure at the beginning of this page):
+In order to collect points, show *VSCode* on your laptop with following settings
+turned-on:
 
-1. Show that `UTF-8` is turned on.
+1. `UTF-8` is turned on.
 
-1. Show that `LF`, not `CR/LF` is turned on.
+1. `LF` is turned on, not `CR/LF`.
 
-1. Start the `dev-container-openjdk25` container (or the *Python* container for
-    *Python*) and connect the *VSCode* IDE to this container.
+1. Start *VSCode* and connect to the *dev-container*.
 
     <!-- 
     1. Set a break-point at the line with `System.out.println()` as shown in the
@@ -421,7 +420,7 @@ turned-on (see the figure at the beginning of this page):
     &nbsp;
     -->
 
-1. Detach the terminal with: `^T + ^D` and compile and run *"Hello, World!"* in the
+1. Detach the terminal with: `^T + ^D`, compile and run *"Hello, World!"* in the
     detached terminal.
 
     <img src="../markup/img/vscode-2-devcontainer-helloworld-java-detached.png" width="400"/>
@@ -433,9 +432,9 @@ turned-on (see the figure at the beginning of this page):
 
     ```json
     {
-        "files.autoSave": "afterDelay",         // 'afterDelay' (1sec), 'onFocusChange', 'onWindowChange'
-        "files.autoSaveDelay": 800,             // auto-save file after short delay (800ms)
-        "files.eol": "\n",                      // use '\n' as default line ending (not: CR/LF)
+        "files.autoSave": "afterDelay",     // auto-save after 800ms
+        "files.autoSaveDelay": 800,         // 
+        "files.eol": "\n",                  // use '\n' as default line ending (not: CR/LF)
         // ...
     }
     ```

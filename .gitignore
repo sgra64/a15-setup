@@ -1,11 +1,13 @@
-#------------------------------------------------------------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # .gitignore with patterns of files and directories to be ignored by git.
 # //
 # see: https://www.atlassian.com/git/tutorials/saving-changes/gitignore
-#------------------------------------------------------------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # ignore git-modules
 .gitmodules
+.devcontainer-java/
+.devcontainer-python/
 
 # ignore output directories with generated content
 bin/
