@@ -1,7 +1,7 @@
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 # Assignments B
 
-Goal of this assignments is to learn or repeat some festures of *Java*.
+Goal of this assignments is to learn or repeat some techniques for *Java*.
 
 Steps:
 
