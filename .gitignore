@@ -6,6 +6,9 @@
 
 # ignore git-modules
 .gitmodules
+.devcontainer-java/
+.devcontainer-python/
+
 
 # ignore output directories with generated content
 bin/
